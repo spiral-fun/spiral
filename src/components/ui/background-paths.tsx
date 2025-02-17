@@ -61,7 +61,7 @@ export function BackgroundPaths({
 	const router = useRouter();
 	const { login } = useLogin({
 		onComplete: () => {
-			router.push("/");
+			router.push("/chat");
 		},
 	});
 

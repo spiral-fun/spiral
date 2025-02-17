@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { useLogin } from "@privy-io/react-auth";
+import {
+	IconBrandGithub,
+	IconBrandGithubFilled,
+	IconBrandX,
+} from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,7 +38,6 @@ export default function Header() {
 				<ul className="col-start-2 gap-5 px-2 font-mono font-semibold uppercase -tracking-2 text-brand-neutrals-700 dark:text-brand-neutrals-200 xl:gap-11 hidden lg:flex">
 					<li>
 						<Link
-							target="_self"
 							className="transition-colors duration-300 hover:text-brand-foreground motion-reduce:transition-none"
 							href="/about"
 						>
@@ -42,24 +46,24 @@ export default function Header() {
 					</li>
 					<li>
 						<Link
-							target="_self"
 							className="transition-colors duration-300 hover:text-brand-foreground motion-reduce:transition-none"
-							href="/token"
+							href="/spiral"
 						>
 							TOKEN
 						</Link>
 					</li>
-					<li>
-						<Link
-							target="_self"
-							className="transition-colors duration-300 hover:text-brand-foreground motion-reduce:transition-none"
-							href="/socials"
-						>
-							SOCIALS
-						</Link>
-					</li>
 				</ul>
-				<div>
+				<div className="flex flex-row items-center justify-center gap-2">
+					<Link href={"https://github.com/spiral-fw/spiral"} target="_blank">
+						<Button size={"icon"} variant={"ghost"}>
+							<IconBrandGithub />
+						</Button>
+					</Link>
+					<Link href={"https://x.com/spiral_fw"} target="_blank">
+						<Button size={"icon"} variant={"ghost"}>
+							<IconBrandX />
+						</Button>
+					</Link>
 					<Button
 						className="h-[46px] font-mono text-[14px] transition-colors"
 						variant="outline"

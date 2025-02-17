@@ -1,17 +1,22 @@
 "use client";
 
 import { env } from "@/env";
-import { PrivyProvider } from "@privy-io/react-auth";
+import { PrivyProvider, usePrivy } from "@privy-io/react-auth";
 import { toSolanaWalletConnectors } from "@privy-io/react-auth/solana";
 import { ThemeProvider } from "./theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
+import NotLoggedIn from "./not-logged-in";
+import { usePathname } from "next/navigation";
 
 const solanaConnectors = toSolanaWalletConnectors();
+const publicPaths = ["/", "/about", "/spiral"];
 
 export default function GlobalProviders({
 	children,
 }: { children: React.ReactNode }) {
+	const { authenticated } = usePrivy();
+	const pathname = usePathname();
 	const [queryClient] = useState(
 		() =>
 			new QueryClient({
@@ -32,7 +37,7 @@ export default function GlobalProviders({
 					appearance: {
 						theme: "dark",
 						accentColor: "#676FFF",
-						logo: "https://i.imgur.com/QhzpBCA.png",
+						logo: "https://i.ibb.co/XrgcfHr2/spiral.png",
 						walletChainType: "solana-only",
 						showWalletLoginFirst: true,
 					},
@@ -51,6 +56,7 @@ export default function GlobalProviders({
 					defaultTheme="dark"
 					disableTransitionOnChange
 				>
+					{!authenticated && !publicPaths.includes(pathname) && <NotLoggedIn />}
 					{children}
 				</ThemeProvider>
 			</PrivyProvider>

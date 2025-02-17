@@ -5,7 +5,7 @@ import { PrivyProvider, usePrivy } from "@privy-io/react-auth";
 import { toSolanaWalletConnectors } from "@privy-io/react-auth/solana";
 import { ThemeProvider } from "./theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NotLoggedIn from "./not-logged-in";
 import { usePathname } from "next/navigation";
 
@@ -15,7 +15,7 @@ const publicPaths = ["/", "/about", "/spiral"];
 export default function GlobalProviders({
 	children,
 }: { children: React.ReactNode }) {
-	const { authenticated } = usePrivy();
+	const { ready, authenticated } = usePrivy();
 	const pathname = usePathname();
 	const [queryClient] = useState(
 		() =>
@@ -56,7 +56,9 @@ export default function GlobalProviders({
 					defaultTheme="dark"
 					disableTransitionOnChange
 				>
-					{!authenticated && !publicPaths.includes(pathname) && <NotLoggedIn />}
+					{ready && !authenticated && !publicPaths.includes(pathname) && (
+						<NotLoggedIn />
+					)}
 					{children}
 				</ThemeProvider>
 			</PrivyProvider>

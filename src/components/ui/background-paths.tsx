@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useLogin } from "@privy-io/react-auth";
 import { useRouter } from "next/navigation";
+import { IconCopy } from "@tabler/icons-react";
 
 function FloatingPaths({ position }: { position: number }) {
 	const paths = Array.from({ length: 36 }, (_, i) => ({
@@ -65,6 +66,12 @@ export function BackgroundPaths({
 		},
 	});
 
+	const copyToClipboard = () => {
+		navigator.clipboard.writeText(
+			"BWqTPFSGwoh1K9avVUj3zekYCHwM1YR27nXoTJUTpump",
+		);
+	};
+
 	return (
 		<div className="relative h-[93vh] md:h-[90vh] w-screen lg:w-full flex items-center justify-center overflow-hidden bg-white dark:bg-neutral-950 rounded-2xl">
 			<div className="absolute inset-0">
@@ -117,6 +124,19 @@ export function BackgroundPaths({
 						Spiral is the <span className="font-bold">best way</span> to learn
 						on-chain.
 					</motion.p>
+
+					<div className="pb-4 flex w-full justify-center">
+						<Button
+							variant={"secondary"}
+							onClick={copyToClipboard}
+							className="flex items-center gap-2"
+						>
+							<span className="font-mono text-sm max-w-[140px] truncate">
+								BWqTPFSGwoh1K9avVUj3zekYCHwM1YR27nXoTJUTpump
+							</span>
+							<IconCopy />
+						</Button>
+					</div>
 
 					<div
 						className="inline-block group relative bg-gradient-to-b from-black/10 to-white/10

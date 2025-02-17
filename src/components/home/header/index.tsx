@@ -54,7 +54,7 @@ export default function Header() {
 					</li>
 				</ul>
 				<div className="flex flex-row items-center justify-center gap-2">
-					<Link href={"https://github.com/spiral-fw/spiral"} target="_blank">
+					<Link href={"https://github.com/spiral-fun/spiral"} target="_blank">
 						<Button size={"icon"} variant={"ghost"}>
 							<IconBrandGithub />
 						</Button>

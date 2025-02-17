@@ -25,6 +25,7 @@ import { NavAccount } from "./nav-account";
 import { NavActivity } from "./nav-activity";
 import { usePrivy } from "@privy-io/react-auth";
 import Image from "next/image";
+import Link from "next/link";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const { toggleSidebar } = useSidebar();
@@ -91,15 +92,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 					<Separator orientation="horizontal" className="mr-2 h-[1px]" />
 				</div>
 				<NavUser wallet={user?.wallet?.address} />
-				<Button
-					variant={"ghost"}
-					className="h-[32px] flex items-center justify-start px-2"
-				>
-					<IconBrandX size={16} />
-					<span className="group-data-[collapsible=icon]:hidden font-mono">
-						Follow Us
-					</span>
-				</Button>
+				<Link href={"https://x.com/spiral_fw"} target="_blank">
+					<Button
+						variant={"ghost"}
+						className="h-[32px] flex items-center justify-start px-2"
+					>
+						<IconBrandX size={16} />
+						<span className="group-data-[collapsible=icon]:hidden font-mono">
+							Follow Us
+						</span>
+					</Button>
+				</Link>
 			</SidebarFooter>
 		</Sidebar>
 	);

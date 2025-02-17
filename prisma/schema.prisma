@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+enum MessageRole {
+    user
+    assistant
+}
+
+enum AIModel {
+    auto
+    openai
+    gemini
+    deepseek
+}
+
+model User {
+    id        String   @id
+    chats     Chat[]
+    updatedAt DateTime @updatedAt
+    createdAt DateTime @default(now())
+
+    Favorite Favorite[]
+}
+
+model Chat {
+    id          String    @id @default(uuid())
+    userId      String
+    user        User      @relation(fields: [userId], references: [id])
+    messages    Message[]
+    model       AIModel   @default(auto)
+    isTokenChat Boolean   @default(false)
+    tokenData   String?   @db.Text
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+
+    @@index([userId])
+}
+
+model Message {
+    id        String      @id @default(uuid())
+    content   String      @db.Text
+    role      MessageRole
+    chatId    String
+    chat      Chat        @relation(fields: [chatId], references: [id], onDelete: Cascade)
+    createdAt DateTime    @default(now())
+    updatedAt DateTime    @updatedAt
+
+    @@index([chatId])
+}
+
+model Favorite {
+    id        String   @id @default(uuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    tokenId   String
+    symbol    String
+    createdAt DateTime @default(now())
+
+    @@index([userId, tokenId], name: "user_token_unique")
+}

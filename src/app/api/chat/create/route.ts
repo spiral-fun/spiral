@@ -33,6 +33,21 @@ export async function POST(req: Request) {
 				{ status: 429 },
 			);
 		}
+
+		let user = await db.user.findUnique({
+			where: {
+				id: realId,
+			},
+		});
+
+		if (!user) {
+			user = await db.user.create({
+				data: {
+					id: realId,
+				},
+			});
+		}
+
 		const chat = await db.chat.create({
 			data: {
 				userId: realId,

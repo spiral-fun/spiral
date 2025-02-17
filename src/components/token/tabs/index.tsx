@@ -14,7 +14,6 @@ import MarketStats from "./market-stats";
 import Holders from "./holders";
 import Traders from "./traders";
 import BubbleMap from "./bubble-map";
-import ActiveWallets from "./active-wallets";
 import {
 	IconAdjustmentsAlt,
 	IconArrowsRightLeft,
@@ -50,12 +49,6 @@ const tabs = [
 		label: "Bubble Map",
 		component: BubbleMap,
 		icon: <IconMapPin size={16} />,
-	},
-	{
-		value: "active-wallets",
-		label: "Active Wallets",
-		component: ActiveWallets,
-		icon: <IconUsers size={16} />,
 	},
 ];
 
